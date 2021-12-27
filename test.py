@@ -1,1 +1,1 @@
-print('testing Hx ...')
+print('testing NX...')
