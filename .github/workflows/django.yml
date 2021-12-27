@@ -2,9 +2,10 @@ name: Django CI
 
 on:
   push:
-    branches: [ NF ]
+    branches: [ main ]
   pull_request:
     branches: [ NF ]
+    # jascjk#
 
 jobs:
   build:
