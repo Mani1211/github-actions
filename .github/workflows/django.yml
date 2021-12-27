@@ -17,7 +17,6 @@ on:
       # Push events on main branch
       - main
       # Push events to branches matching refs/heads/mona/octocat
-      - Hardfixes
       # Push events to branches matching refs/heads/releases/10
 
 jobs:
