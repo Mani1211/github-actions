@@ -1,15 +1,24 @@
 name: Django CI
 
-on:
+# on:
+#   push:
+#     branches-ignore:
+#       # Do not push events to branches matching refs/heads/mona/octocat
+#       - 'Normal'
+#   pull_request:
+#     branches-ignore:
+#       # Do not push events to branches matching refs/heads/mona/octocat
+#       - 'Normal'
 
+on:
   push:
-     branches-ignore:
-      # Do not push events to branches matching refs/heads/mona/octocat
-      - 'Normal'
-  pull_request:
-    branches-ignore:
-      # Do not push events to branches matching refs/heads/mona/octocat
-      - 'Normal'
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      # Push events on main branch
+      - main
+      # Push events to branches matching refs/heads/mona/octocat
+      - Normal
+      # Push events to branches matching refs/heads/releases/10
 
 jobs:
   build:
