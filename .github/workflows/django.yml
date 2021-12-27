@@ -11,13 +11,17 @@ name: Django CI
 #       - 'Normal'
 
 on:
+
+  pull_request:
+    branches:
+      - Normalfix
   push:
     # Sequence of patterns matched against refs/heads
     branches:    
       # Push events on main branch
       - main
+      - Normalfix
       # Push events to branches matching refs/heads/mona/octocat
-      - Normal
       # Push events to branches matching refs/heads/releases/10
 
 jobs:
