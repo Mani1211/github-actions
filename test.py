@@ -1,2 +1,2 @@
-print('testing main from nf...')
+print('testing main...')
 
