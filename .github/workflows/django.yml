@@ -1,9 +1,11 @@
 name: Django CI
 
 on:
-  pull_request:
+  push:
     branches-ignore:
-      - "N"
+      - '*'
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
