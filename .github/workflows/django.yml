@@ -3,9 +3,9 @@ name: Django CI
 on:
 
   push:
-    branches: 
-      - 'main'
-      - 'hardfix'
+     branches-ignore:
+      # Do not push events to branches matching refs/heads/mona/octocat
+      - 'Normal'
 
   pull_request:
     branches-ignore:
