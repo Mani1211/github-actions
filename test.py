@@ -1,1 +1,1 @@
-print('testing NX...')
+print('testing N FROM MAIN...')
