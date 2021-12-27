@@ -11,6 +11,9 @@ name: Django CI
 #       - 'Normal'
 
 on:
+
+  pull_request:
+    - Normalfix
   push:
     # Sequence of patterns matched against refs/heads
     branches:    
