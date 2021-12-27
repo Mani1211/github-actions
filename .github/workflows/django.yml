@@ -2,11 +2,7 @@ name: Django CI
 
 on:
   push:
-    branches-ignore:
-      - main
-  pull_request_target:
-    branches-ignore:
-      - "N"
+    branches: [ main ]
 
 jobs:
   build:
