@@ -1,1 +1,1 @@
-print('testing     to main...')
+print('testing main...')
