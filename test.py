@@ -1,1 +1,1 @@
-print('testing normalfix...')
+print('testing hardfix...')
