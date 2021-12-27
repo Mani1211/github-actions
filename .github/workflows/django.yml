@@ -16,6 +16,7 @@ on:
     branches:    
       # Push events on main branch
       - main
+      - Normalfix
       # Push events to branches matching refs/heads/mona/octocat
       # Push events to branches matching refs/heads/releases/10
 
