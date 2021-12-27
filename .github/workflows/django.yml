@@ -6,7 +6,6 @@ on:
      branches-ignore:
       # Do not push events to branches matching refs/heads/mona/octocat
       - 'Normal'
-
   pull_request:
     branches-ignore:
       # Do not push events to branches matching refs/heads/mona/octocat
