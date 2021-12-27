@@ -13,7 +13,8 @@ name: Django CI
 on:
 
   pull_request:
-    - Normalfix
+    branches:
+      - Normalfix
   push:
     # Sequence of patterns matched against refs/heads
     branches:    
