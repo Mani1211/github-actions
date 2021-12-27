@@ -4,7 +4,7 @@ on:
   push:
     branches: [ NF ]
   pull_request:
-    branches: [ NF ]
+    branches-ignore: [ NF ]
 jobs:
   build:
 
