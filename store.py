@@ -824,10 +824,13 @@ def location():
     let isValid = document.getElementById('pos-location-form').checkValidity()
     return isValid 
     ''')
+    print(is_valid)
+    if(is_valid):
+        time.sleep(0.2)
+        element.click()
     driver.find_element(By.XPATH, "//span[@id='save']").click()
     print(driver.current_url)
     print(driver.get_window_position())
-    print(is_valid)
     # WebDriverWait(driver, 20).until(element_to_be_clickable((By.XPATH, "//span[contains(@class,'store-menu-text') and contains(text(), '"+str("Bangkok")+"')]")))
     elem = driver.find_element(By.XPATH, "//span[contains(@class,'store-menu-text') and contains(text(), '"+str("Bangkok")+"')]")
     elem.click()
