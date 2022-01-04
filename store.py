@@ -817,6 +817,7 @@ def location():
     driver.execute_script("arguments[0].scrollIntoView;",element)
     element.click()
     driver.find_element(By.XPATH, "//span[@id='save']").click()
+    driver.implicitly_wait(10)
     elem = driver.find_element(By.XPATH, "//span[contains(@class,'store-menu-text') and contains(text(), '"+str("Bangkok")+"')]")
     elem.click()
     ele = driver.find_element(By.XPATH, '//a[contains(@class , "text-delete") and contains(text(), "Delete Location") ] ')
