@@ -20,7 +20,7 @@ path = webdriver.Chrome(ChromeDriverManager().install())#
 username = "shopstertest"
 password = "shopster123!"
 
-path = "/home/rohan/Code/chromedriver"
+# path = "/home/rohan/Code/chromedriver"
 # capabilities = DesiredCapabilities.
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--remote-debugging-port=9222')
