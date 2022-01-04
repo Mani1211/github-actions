@@ -5,7 +5,7 @@ on:
     branches-ignore:
       - '*'
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -24,4 +24,4 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Run Tests
       run: |
-        python test.py
+        python test.py 
