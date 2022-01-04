@@ -1,3 +1,4 @@
+from selenium.webdriver.support.expected_conditions import element_to_be_clickable
 from datetime import timedelta,datetime
 from selenium import webdriver
 import openpyxl
@@ -24,11 +25,11 @@ SCREEN_HEIGHT=720
 
 # driver = webdriver.Chrome(executable_path= path) 
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument('--remote-debugging-port=9222')
-chrome_options.add_argument('--no-sandbox') 
-chrome_options.binary_location = "/usr/bin/google-chrome"
-chrome_options.add_argument('--headless') 
-chrome_options.add_argument('--disable-dev-shm-usage')
+# chrome_options.add_argument('--remote-debugging-port=9222')
+# chrome_options.add_argument('--no-sandbox') 
+# chrome_options.binary_location = "/usr/bin/google-chrome"
+# chrome_options.add_argument('--headless') 
+# chrome_options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome('./test_resources/chromedriver',chrome_options=chrome_options) 
 # driver.maximize_window()
 driver.set_window_size(SCREEN_WIDTH,SCREEN_HEIGHT)
@@ -818,6 +819,7 @@ def location():
     element.click()
     driver.find_element(By.XPATH, "//span[@id='save']").click()
     driver.implicitly_wait(10)
+    WebDriverWait(driver, 20).until(element_to_be_clickable((By.XPATH, "//span[contains(@class,'store-menu-text') and contains(text(), '"+str("Bangkok")+"')]")))
     elem = driver.find_element(By.XPATH, "//span[contains(@class,'store-menu-text') and contains(text(), '"+str("Bangkok")+"')]")
     elem.click()
     ele = driver.find_element(By.XPATH, '//a[contains(@class , "text-delete") and contains(text(), "Delete Location") ] ')
