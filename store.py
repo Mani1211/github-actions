@@ -19,7 +19,8 @@ import sys
 # driver = webdriver.Chrome(ChromeDriverManager().install())
 username = "shopstertest"
 password = "shopster123!"
-
+SCREEN_WIDTH=1280
+SCREEN_HEIGHT=720
 # driver = webdriver.Chrome(executable_path= path) 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--remote-debugging-port=9222')
@@ -28,7 +29,8 @@ chrome_options.binary_location = "/usr/bin/google-chrome"
 chrome_options.add_argument('--headless') 
 chrome_options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome('./assets/test/chromedriver',chrome_options=chrome_options) 
-driver.maximize_window()
+# driver.maximize_window()
+driver.set_window_size(SCREEN_WIDTH,SCREEN_HEIGHT)
 driver.get("https://shopster.ai/en/login/")
 
 toggle = sys.argv[1:]
