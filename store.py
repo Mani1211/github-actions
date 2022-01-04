@@ -28,7 +28,7 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--remote-debugging-port=9222')
 chrome_options.add_argument('--no-sandbox') 
 chrome_options.binary_location = "/usr/bin/google-chrome"
-chrome_options.add_argument('--headless') 
+# chrome_options.add_argument('--headless') 
 chrome_options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome('./test_resources/chromedriver',chrome_options=chrome_options) 
 # driver.maximize_window()
