@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import Select
 from pathlib import Path
 from selenium import webdriver
 # from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+# from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
 import sys
 
@@ -22,7 +22,7 @@ username = "shopstertest"
 password = "shopster123!"
 
 path = "/home/rohan/Code/chromedriver"
-capabilities = DesiredCapabilities.chrome()
+# capabilities = DesiredCapabilities.
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--no-sandbox') 
 chrome_options.add_argument('--headless') 
