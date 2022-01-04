@@ -17,12 +17,12 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
 import sys
 
-driver = webdriver.Chrome(ChromeDriverManager().install())
+# driver = webdriver.Chrome(ChromeDriverManager().install())
 username = "shopstertest"
 password = "shopster123!"
 
 path = "/home/rohan/Code/chromedriver"
-# driver = webdriver.Chrome(executable_path= path) 
+driver = webdriver.Chrome(executable_path= path) 
 driver.maximize_window()
 driver.get("https://shopster.ai/en/login/")
 
