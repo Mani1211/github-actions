@@ -16,7 +16,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 # from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
 import sys
-path = webdriver.Chrome(ChromeDriverManager().install())#
+# path = webdriver.Chrome(ChromeDriverManager().install())#
 username = "shopstertest"
 password = "shopster123!"
 
@@ -28,7 +28,7 @@ chrome_options.add_argument('--no-sandbox')
 chrome_options.binary_location = "/usr/bin/google-chrome"
 chrome_options.add_argument('--headless') 
 chrome_options.add_argument('--disable-dev-shm-usage')
-driver = webdriver.Chrome(executable_path= path,chrome_options=chrome_options) 
+driver = webdriver.Chrome('./chromedriver',chrome_options=chrome_options) 
 driver.maximize_window()
 driver.get("https://shopster.ai/en/login/")
 
