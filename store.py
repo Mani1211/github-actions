@@ -11,7 +11,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 import time
 from selenium.webdriver.support.ui import Select
 from pathlib import Path
-from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
