@@ -820,6 +820,7 @@ def location():
     element = driver.find_element(By.XPATH, "//span[@id='save']")
     driver.execute_script("arguments[0].scrollIntoView;",element)
     driver.find_element(By.XPATH, "//span[@id='save']").click()
+    print(driver.current_url)
     WebDriverWait(driver, 20).until(element_to_be_clickable((By.XPATH, "//span[contains(@class,'store-menu-text') and contains(text(), '"+str("Bangkok")+"')]")))
     elem = driver.find_element(By.XPATH, "//span[contains(@class,'store-menu-text') and contains(text(), '"+str("Bangkok")+"')]")
     elem.click()
