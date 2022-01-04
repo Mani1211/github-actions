@@ -12,7 +12,7 @@ import time
 from selenium.webdriver.support.ui import Select
 from pathlib import Path
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
+# from webdriver_manager.chrome import ChromeDriverManager
 # from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
 import sys
@@ -24,14 +24,15 @@ SCREEN_HEIGHT=720
 
 # driver = webdriver.Chrome(executable_path= path) 
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument('--remote-debugging-port=9222')
-chrome_options.add_argument('--no-sandbox') 
-chrome_options.binary_location = "/usr/bin/google-chrome"
-chrome_options.add_argument('--headless') 
-chrome_options.add_argument('--disable-dev-shm-usage')
-driver = webdriver.Chrome('./assets/test/chromedriver',chrome_options=chrome_options) 
+# chrome_options.add_argument('--remote-debugging-port=9222')
+# chrome_options.add_argument('--no-sandbox') 
+# chrome_options.binary_location = "/usr/bin/google-chrome"
+# chrome_options.add_argument('--headless') 
+# chrome_options.add_argument('--disable-dev-shm-usage')
+driver = webdriver.Chrome('./test_resources/chromedriver',chrome_options=chrome_options) 
 # driver.maximize_window()
 driver.set_window_size(SCREEN_WIDTH,SCREEN_HEIGHT)
+base_dir = os.path.join(Path(__file__).resolve(strict=True).parent, 'test_resources')
 driver.get("https://shopster.ai/en/login/")
 
 toggle = sys.argv[1:]
@@ -135,7 +136,7 @@ def draft_order():
     driver.find_element(By.XPATH, "//button[@id = 'mapgo']").click()
     driver.implicitly_wait(3)
     driver.find_element(By.XPATH, "//input[@id = 'shipping']").send_keys("14/12/2021 13:00")
-    driver.find_element(By.XPATH, "//input[@id = 'payment-confirmation']").send_keys("./assets/test/1.jpg")
+    driver.find_element(By.XPATH, "//input[@id = 'payment-confirmation']").send_keys(os.path.join(base_dir, '1.jpg'))
     time.sleep(2)
     driver.find_element(By.XPATH, "//button[@id = 'copy-en']").click()
     error_check()
@@ -256,7 +257,7 @@ def take_order():
     d = hour_rounder(now)
     date_time = d.strftime("%m/%d/%Y %H:%M")
     driver.find_element(By.XPATH, "//input[@id = 'shipping']").send_keys(str(date_time))
-    driver.find_element(By.XPATH, "//input[@id = 'payment-confirmation']").send_keys("./assets/test/1.jpg")
+    driver.find_element(By.XPATH, "//input[@id = 'payment-confirmation']").send_keys(os.path.join(base_dir, '1.jpg'))
     time.sleep(3)
     driver.find_element(By.XPATH, "//button[@id = 'copy-en']").click()
     error_check()
@@ -389,7 +390,7 @@ def orders():
     try:
         element = driver.find_element(By.XPATH, "//input[@id = 'media']")
         driver.execute_script("arguments[0].scrollIntoView();",element)
-        driver.find_element(By.XPATH, "//input[@id = 'media']").send_keys("./assets/test/1.jpg")
+        driver.find_element(By.XPATH, "//input[@id = 'media']").send_keys(os.path.join(base_dir, '1.jpg'))
         element = driver.find_element(By.XPATH, '//button[@class="uk-button uk-button-primary"]')
         driver.execute_script("arguments[0].scrollIntoView();",element)
         driver.find_element(By.XPATH, '//button[@class="uk-button uk-button-primary"]').click()
@@ -511,7 +512,7 @@ def categories():
     element.click()
     driver.execute_script('document.getElementById("id_icon").style.display = "block";')
     img = driver.find_element(By.ID, "id_icon")
-    img.send_keys('./assets/test/1.jpg')
+    img.send_keys(os.path.join(base_dir, '1.jpg'))
     driver.find_element(By.XPATH, "//span[@id='save']").click()
     error_check()
 
@@ -560,7 +561,7 @@ def products():
     driver.find_element(By.XPATH, "//span[@class='mdi mdi-16px mdi-plus-thick add-image-icon']").click()
     driver.execute_script('document.getElementById("phone-input").style.display = "block";')
     element = driver.find_element(By.XPATH, "//input[@id='phone-input']")
-    element.send_keys('./assets/test/1.jpg')
+    element.send_keys(os.path.join(base_dir, '1.jpg'))
     driver.find_element(By.XPATH, "//button[@class='mdi mdi-24px mdi-close uk-modal-close-default uk-icon uk-close']").click()
 
     driver.find_element(By.XPATH, "//span[@id='save']").click()
@@ -726,7 +727,7 @@ def bundle():
     driver.find_element(By.XPATH, "//span[@class='add-image-text']").click()
     driver.execute_script('document.getElementById("phone-input").style.display = "block";')
     element = driver.find_element(By.XPATH, "//input[@id='phone-input']")
-    element.send_keys('./assets/test/1.jpg')
+    element.send_keys(os.path.join(base_dir, '1.jpg'))
     driver.find_element(By.XPATH,"//div[@id='choice-modal']//button[@class='mdi mdi-24px mdi-close uk-modal-close-default uk-icon uk-close']").click()
     driver.implicitly_wait(10)
     scroll = driver.find_element(By.XPATH, '//span[contains(@class, "add-image-text") and contains(text(),"Add Products")] ')
@@ -880,7 +881,7 @@ def store_design_fonts():
     driver.get("https://shopster.ai/en/app/store/store-design/logo/")
     driver.execute_script('document.getElementById("submit").style.display = "block";')
     fav_icon = driver.find_element(By.XPATH, "//input[@id = 'id_favicon']")
-    fav_icon.send_keys('./assets/test/1.jpg')
+    fav_icon.send_keys(os.path.join(base_dir, '1.jpg'))
     error_check()
 
 # STORE DESIGN
