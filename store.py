@@ -880,7 +880,7 @@ def store_design_fonts():
     driver.get("https://shopster.ai/en/app/store/store-design/logo/")
     driver.execute_script('document.getElementById("submit").style.display = "block";')
     fav_icon = driver.find_element(By.XPATH, "//input[@id = 'id_favicon']")
-    fav_icon.send_keys('/home/rohan/Github actions/github-actions/assets/test/1.jpg')
+    fav_icon.send_keys('/assets/test/1.jpg')
     error_check()
 
 # STORE DESIGN
