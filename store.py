@@ -1052,7 +1052,7 @@ def seo():
 
 def all_actions():
     # pass
-    orders()
+    # orders()
     collections()
     categories()
     products()
