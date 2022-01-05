@@ -1082,23 +1082,23 @@ def seo():
 
 def all_actions():
     # pass
-    # orders()
+    orders()
     # collections()
     # categories()
     # products()
     # discount()
     # bulk_discount()
     # bundle()
-    location()
-    store_info()
-    store_design()
-    payment_information()   
-    delivery_integration()
-    loyalty_program()
-    inventory_management()
-    customers()
-    translate()
-    seo()
+    # location()
+    # store_info()
+    # store_design()
+    # payment_information()   
+    # delivery_integration()
+    # loyalty_program()
+    # inventory_management()
+    # customers()
+    # translate()
+    # seo()
 
 
 
