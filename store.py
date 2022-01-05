@@ -80,6 +80,10 @@ driver.find_element(By.XPATH, "//button[@class = 'login-cta-button']").click()
 
 def english_summary():
     # ENGLISH SUMMARY
+    time.sleep(2)
+    element = WebDriverWait(driver, 20).until(
+    EC.element_to_be_clickable((By.XPATH, "//button[@id = 'copy-en']")))
+    element.click()
     try:
         toast = driver.find_element(By.XPATH, "//div[@class='jq-toast-single']").text
         print(toast)
@@ -91,9 +95,12 @@ def english_summary():
     except NoSuchElementException:
         raise Exception("English Toast Error")
 
-    driver.find_element(By.XPATH, "//button[@id = 'copy-th']").click()
+    
 
 def thai_summary():
+    element = WebDriverWait(driver, 20).until(
+    EC.element_to_be_clickable((By.XPATH, "//button[@id = 'copy-th']")))
+    element.click()
     try:
         toast = driver.find_element(By.XPATH, "//div[@class='jq-toast-single']").text
         if(toast == "Summary copied!"):
@@ -109,7 +116,7 @@ def draft_order():
     driver.get("https://shopster.ai/en/app/orders/take-order/")
     element = driver.find_element(By.XPATH, "(//div[contains(@class , 'all-products-single-name')])[2]")
     driver.execute_script("arguments[0].scrollIntoView();",element)
-    driver.find_element(By.XPATH, "(//div[contains(@class , 'all-products-single-name')])[2]").click()
+    element.click()
     time.sleep(2)
     try:
         # TRY DROPDOWN
@@ -132,7 +139,7 @@ def draft_order():
     driver.implicitly_wait(3)
     element = driver.find_element(By.XPATH, "//input[@name = 'is_delivery']")
     driver.execute_script("arguments[0].scrollIntoView();",element)
-    driver.find_element(By.XPATH, "//input[@name = 'is_delivery']").click()
+    element.click()
     driver.implicitly_wait(5)
     time.sleep(2)
     element = driver.find_element(By.XPATH, "//input[@name = 'address']")
@@ -145,16 +152,15 @@ def draft_order():
     # select.click()
     select.select_by_index(1)
     driver.find_element(By.XPATH, "//input[@id = 'shipping']").send_keys("14/12/2021 13:00")
+    driver.find_element(By.XPATH, "//input[@id = 'shipping']").send_keys(Keys.ENTER)
     driver.find_element(By.XPATH, "//input[@id = 'payment-confirmation']").send_keys(os.path.join(base_dir, '1.jpg'))
     time.sleep(2)
-    driver.find_element(By.XPATH, "//button[@id = 'copy-en']").click()
-    error_check()
     # ENGLISH SUMMARY
-
-    english_summary
-
+    english_summary()
     # THAI SUMMARY
-    thai_summary
+    thai_summary()
+    driver.find_element(By.XPATH,"//button[@id='draft']").click()
+    error_check()
 
     # EDIT DRAFT
     driver.get("https://shopster.ai/en/app/orders/")
@@ -168,9 +174,10 @@ def draft_order():
     driver.find_element(By.XPATH, "(//div[contains(@class , 'all-products-single-name')])[2]").click()
     try:
         # TRY DROPDOWN
-        element = driver.find_element(By.XPATH, "//select[@class = 'custom-select custom-select-sm']")
-        element.click()
-        select.select_by_index(1)
+        # element = driver.find_element(By.XPATH, "//select[@class = 'custom-select custom-select-sm']")
+        # element.click()
+        select = Select(driver.find_element_by_xpath("//select[@class = 'custom-select custom-select-sm']"))
+        select.select_by_index(0)
         driver.find_element(By.XPATH, '(//button[@class = "select-button"])').click()
     except:
         try:
@@ -181,12 +188,20 @@ def draft_order():
         except:
             print("Bundle")
             driver.find_element(By.XPATH, '(//button[@class = "select-button"])').click()
-    time.sleep(2)
     driver.find_element(By.XPATH, "//button[@id = 'checkout']").click()
+    time.sleep(2)
     element = driver.find_element(By.XPATH, "//button[@id = 'draft']")
+    # element = WebDriverWait(driver, 20).until(
+    # EC.element_to_be_clickable((By.XPATH, "//button[@id = 'draft']")))
+    # element.click()
     driver.execute_script("arguments[0].scrollIntoView();",element)
-    driver.find_element(By.XPATH, "//button[@id = 'draft']").click()
-
+    element.click()
+    try:
+        alert = Alert(driver)
+        print(alert.text)
+        alert.accept()
+    except:
+        print("No such alert")
     error_check()
 
     # DELETE DRAFT
@@ -205,7 +220,7 @@ def draft_order():
     alert = Alert(driver)
     print(alert.text)
     alert.accept()
-    print("Placed Successfully!!")
+    print("Deleted Successfully!!")
 
     error_check()
 
