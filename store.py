@@ -818,6 +818,7 @@ def location():
     element = driver.find_element(By.XPATH, '//li[@class="ui-menu-item"]//a[contains(text(), "21:00:00")]')
     driver.execute_script("arguments[0].scrollIntoView;",element)
     element.click()
+    driver.execute_script("document.body.style.zoom='100%'")
     save = driver.find_element(By.XPATH, "//a[@class='step-primary']")
     driver.execute_script("arguments[0].scrollIntoView;",save)
     is_valid = driver.execute_script('''
@@ -832,7 +833,7 @@ def location():
     print(driver.get_window_position())
     print(save.location)
     WebDriverWait(driver, 5).until(element_to_be_clickable((By.XPATH, "//a[@class='step-primary']")))
-    driver.find_element(By.XPATH, "//a[@class='step-primary']").send_keys(Keys.ENTER)
+    driver.find_element(By.XPATH, "//a[@class='step-primary']").click()
     driver.execute_script("var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",save)
     print(save.get_attribute("automationTrack"))
     print(driver.current_url)
