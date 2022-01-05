@@ -818,8 +818,8 @@ def location():
     element = driver.find_element(By.XPATH, '//li[@class="ui-menu-item"]//a[contains(text(), "21:00:00")]')
     driver.execute_script("arguments[0].scrollIntoView;",element)
     element.click()
-    element = driver.find_element(By.XPATH, "//a[@class='step-primary']")
-    driver.execute_script("arguments[0].scrollIntoView;",element)
+    save = driver.find_element(By.XPATH, "//a[@class='step-primary']")
+    driver.execute_script("arguments[0].scrollIntoView;",save)
     is_valid = driver.execute_script('''
     let isValid = document.getElementById('pos-location-form').checkValidity()
     return isValid 
@@ -827,10 +827,10 @@ def location():
     print(is_valid)
     if(is_valid):
         time.sleep(0.2)
-        element.click()
+        driver.execute_script("arguments[0].click();",save)
         print("inside if")
     print(driver.get_window_position())
-    print(element.location)
+    print(save.location)
     # driver.find_element(By.XPATH, "//a[@class='step-primary']").click()
     WebDriverWait(driver, 5).until(element_to_be_clickable((By.XPATH, "//a[@class='step-primary']")))
     print(driver.current_url)
