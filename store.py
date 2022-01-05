@@ -544,6 +544,7 @@ def categories():
     element = driver.find_element(By.XPATH, "//div[contains(@class ,'categories-name') and contains (text(), '" + str("category") + "')]")
     driver.execute_script("arguments[0].scrollIntoView();",element)
     driver.implicitly_wait(5)
+    time.sleep(2)
     element = WebDriverWait(driver, 20).until(
     EC.element_to_be_clickable((By.XPATH, "//div[contains(@class ,'categories-name') and contains (text(), '" + str("category") + "')]")))
     element.click()
