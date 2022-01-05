@@ -397,6 +397,7 @@ def orders():
     element.send_keys(Keys.CONTROL + "a")
     element.send_keys(Keys.BACK_SPACE)
     element.send_keys(date_time)
+    element.send_keys(Keys.ENTER)
     element = driver.find_element(By.XPATH, "//button[@id = 'finalize']")
     driver.execute_script("arguments[0].scrollIntoView();",element)
     element.click()
