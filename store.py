@@ -280,6 +280,7 @@ def take_order():
     time.sleep(3)
     element = driver.find_element(By.XPATH, "//input[@name = 'address']")
     driver.execute_script("arguments[0].scrollIntoView();",element)
+    time.sleep(3)
     element.send_keys("donki mall")
     driver.implicitly_wait(3)
     driver.find_element(By.XPATH, "//button[@id = 'mapgo']").click()
