@@ -319,23 +319,23 @@ def orders():
     driver.find_element(By.XPATH, "//span[@class='more-actions-nav-button']").click()
     driver.find_element(By.XPATH, "//a[@id='get_report']").click()
     time.sleep(2)
-    xlsx_file = Path('/home/rohan/Downloads', 'Orders Report.xlsx')
-    driver.implicitly_wait(3)
-    wb_obj = openpyxl.load_workbook(xlsx_file)
-    sheet = wb_obj.active
-    if(sheet.max_row>1):
-        print("Data exists")
-    else:
-        raise Exception("No Data Found")
+    # xlsx_file = Path('/home/rohan/Downloads', 'Orders Report.xlsx')
+    # driver.implicitly_wait(3)
+    # wb_obj = openpyxl.load_workbook(xlsx_file)
+    # sheet = wb_obj.active
+    # if(sheet.max_row>1):
+    #     print("Data exists")
+    # else:
+    #     raise Exception("No Data Found")
     driver.find_element(By.XPATH, "//a[@id='delivery_report']").click()
     time.sleep(2)
-    xlsx_file = Path('/home/rohan/Downloads', 'Delivery Report.xlsx')
-    wb_obj = openpyxl.load_workbook(xlsx_file)
-    sheet = wb_obj.active
-    if(sheet.max_row>1):
-        print("Data exists")
-    else:
-        raise Exception("No Data Found")
+    # xlsx_file = Path('/home/rohan/Downloads', 'Delivery Report.xlsx')
+    # wb_obj = openpyxl.load_workbook(xlsx_file)
+    # sheet = wb_obj.active
+    # if(sheet.max_row>1):
+    #     print("Data exists")
+    # else:
+    #     raise Exception("No Data Found")
 
     error_check()
 
