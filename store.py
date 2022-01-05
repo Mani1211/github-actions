@@ -23,7 +23,6 @@ username = "shopstertest"
 password = "shopster123!"
 SCREEN_WIDTH=1280
 SCREEN_HEIGHT=720
-
 # driver = webdriver.Chrome(executable_path= path) 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--remote-debugging-port=9222')
