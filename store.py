@@ -388,7 +388,7 @@ def orders():
     driver.execute_script("arguments[0].scrollIntoView();",element)
     driver.find_element(By.XPATH, "//div[contains(@class , 'all-products-single-name') and contains(text(), 'FERRERO CHOCOLATE TART')]").click()
     driver.find_element(By.XPATH, "//button[@id = 'checkout']").click()
-    time.sleep(1)
+
     element = driver.find_element(By.XPATH, "//input[@id = 'shipping']")
     driver.execute_script("arguments[0].scrollIntoView();",element)
     now = datetime.now()
@@ -460,7 +460,6 @@ def orders():
     driver.get("https://shopster.ai/en/app/orders/")
     element = driver.find_element(By.XPATH, "//div[contains(@class,'order-number') and contains(text(),'"+order_id +"')]")
     driver.execute_script("arguments[0].scrollIntoView();",element)
-    time.sleep(2)
     driver.find_element(By.XPATH, "//div[contains(@class,'order-number') and contains(text(),'"+order_id +"')]").click()
 
 
@@ -779,7 +778,6 @@ def bundle():
     element.send_keys(Keys.BACK_SPACE)
     element.send_keys(50)
     driver.find_element(By.XPATH, "//button[@id='save-product']").click()
-    time.sleep(1)
     driver.find_element(By.XPATH, "//input[@name='is_fixed_price']").click()
     element = driver.find_element(By.XPATH, "//input[@id='fixed-price-input']")
     driver.execute_script("arguments[0].scrollIntoView();",element)
@@ -831,7 +829,6 @@ def location():
     element = driver.find_element(By.XPATH, "//input[@name='address']")
     element.send_keys("donki mall")
     driver.find_element(By.XPATH, '//button[@id="mapgo"]').click()
-    time.sleep(3)
     element = driver.find_element(By.XPATH, '//input[@name = "contact_name"]')
     driver.execute_script("arguments[0].srollIntoView",element)
     print("Enter Contact Name")
