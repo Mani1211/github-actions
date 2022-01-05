@@ -31,8 +31,8 @@ chrome_options.binary_location = "/usr/bin/google-chrome"
 chrome_options.add_argument('--headless') 
 chrome_options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome('./test_resources/chromedriver',chrome_options=chrome_options) 
-driver.maximize_window()
-# driver.set_window_size(1900,1000)
+# driver.maximize_window()
+driver.set_window_size(SCREEN_WIDTH,SCREEN_HEIGHT)
 base_dir = os.path.join(Path(__file__).resolve(strict=True).parent, 'test_resources')
 driver.get("https://shopster.ai/en/login/")
 
