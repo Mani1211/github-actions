@@ -248,6 +248,8 @@ def take_order():
     driver.find_element(By.XPATH, "//input[@id = 'order-phone']").send_keys("+919489437364")
     driver.find_element(By.XPATH, "//input[@id = 'order-name']").send_keys("John Doe")
     driver.implicitly_wait(3)
+    element = driver.find_element(By.XPATH, "//input[@name = 'is_delivery']")
+    driver.execute_script("arguments[0].scrollIntoView();",element)
     driver.find_element(By.XPATH, "//input[@name = 'is_delivery']").click()
     driver.implicitly_wait(5)
     time.sleep(2)
