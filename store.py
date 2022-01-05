@@ -801,8 +801,7 @@ def bundle():
 
     # EDIT BUNDLE
     driver.get("https://shopster.ai/en/app/products/")
-    time.sleep(2)
-    element = driver.find_element(By.XPATH, "//div[contains(@class ,'product-price') and contains (text(), 'Product based price')]")
+    element = driver.find_element(By.XPATH, "//a[@data-type='bundle']")
     driver.execute_script("arguments[0].scrollIntoView();",element)
     element.click()
     element = driver.find_element(By.XPATH, "//input[@name='size']")
@@ -813,7 +812,7 @@ def bundle():
 
     # DELETE BUNDLE
     driver.get("https://shopster.ai/en/app/products/")
-    element = driver.find_element(By.XPATH, "//div[contains(@class ,'product-price') and contains (text(), 'Product based price')]")
+    element = driver.find_element(By.XPATH, "//a[@data-type='bundle']")
     driver.execute_script("arguments[0].scrollIntoView();",element)
     element.click()
     element = driver.find_element(By.XPATH, "//a[contains(@class , 'text-delete') and contains(text(), 'Delete Bundle')]")
