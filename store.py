@@ -821,7 +821,7 @@ def location():
     element = driver.find_element(By.XPATH, "//span[@id='save']")
     driver.execute_script("arguments[0].scrollIntoView;",element)
     is_valid = driver.execute_script('''
-    let isValid = document.getElementById('save').checkValidity()
+    let isValid = document.getElementById('pos-location-form').checkValidity()
     return isValid 
     ''')
     print(is_valid)
