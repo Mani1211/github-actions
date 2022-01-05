@@ -275,7 +275,7 @@ def take_order():
     driver.execute_script("arguments[0].scrollIntoView();",element)
     driver.find_element(By.XPATH, "//input[@name = 'is_delivery']").click()
     driver.implicitly_wait(5)
-    time.sleep(2)
+    time.sleep(3)
     element = driver.find_element(By.XPATH, "//input[@name = 'address']")
     driver.execute_script("arguments[0].scrollIntoView();",element)
     element.send_keys("donki mall")
