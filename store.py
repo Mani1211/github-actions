@@ -831,6 +831,7 @@ def location():
         driver.execute_script("arguments[0].click();",save)
         print("inside if")
     print(save.location)
+    webdriver.common.action_chains.move_to_element(save).move_by_offset(1203, 16).click().perform()
     WebDriverWait(driver, 5).until(element_to_be_clickable((By.XPATH, "//a[@class='step-primary']")))
     driver.find_element(By.XPATH, "//a[@class='step-primary']").click()
     driver.execute_script("var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",save)
