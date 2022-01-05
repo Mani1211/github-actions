@@ -20,8 +20,8 @@ import sys
 # driver = webdriver.Chrome(ChromeDriverManager().install())
 username = "shopstertest"
 password = "shopster123!"
-SCREEN_WIDTH=1280
-SCREEN_HEIGHT=720
+SCREEN_WIDTH=1920
+SCREEN_HEIGHT=1080
 
 # driver = webdriver.Chrome(executable_path= path) 
 chrome_options = webdriver.ChromeOptions()
