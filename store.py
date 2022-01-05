@@ -821,13 +821,16 @@ def location():
     element = driver.find_element(By.XPATH, "//span[@id='save']")
     driver.execute_script("arguments[0].scrollIntoView;",element)
     is_valid = driver.execute_script('''
-    let isValid = document.getElementById('pos-location-form').checkValidity()
+    let isValid = document.getElementById('save').checkValidity()
     return isValid 
     ''')
     print(is_valid)
     if(is_valid):
         time.sleep(0.2)
-        element.click()
+        action = webdriver.common.action_chains.ActionChains(driver)
+        action.move_to_element_with_offset(element, 5, 5)
+        action.click()
+        action.perform()
     print(driver.get_window_position())
     print(element.location)
     driver.find_element(By.XPATH, "//span[@id='save']").click()
