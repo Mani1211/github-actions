@@ -809,7 +809,7 @@ def location():
     print("Enter Phone Number")
     # ph_no = input()
     element = driver.find_element(By.XPATH, '//input[@name = "contact_phone"]')
-    element.send_keys("9489437364")
+    element.send_keys("+919489437364")
     element = driver.find_element(By.XPATH, '//input[@id="delivery_start_time"]')
     driver.execute_script("arguments[0].scrollIntoView();",element)
     element.click()
