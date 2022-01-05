@@ -1,7 +1,7 @@
 from selenium.webdriver.support.expected_conditions import element_to_be_clickable
 from datetime import timedelta,datetime
 from selenium import webdriver
-import openpyxl
+# import openpyxl
 import os
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common import keys
@@ -231,7 +231,7 @@ def draft_order():
 def take_order():
 # TAKE ORDER
     driver.get("https://shopster.ai/en/app/orders/take-order/")
-    
+
     #ORDER SOURCE
     time.sleep(2)
     driver.find_element(By.XPATH, "//span[@class='mdi mdi-24px mdi-cog date-gear']").click()
