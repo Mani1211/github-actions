@@ -832,7 +832,7 @@ def location():
     print(driver.get_window_position())
     print(save.location)
     WebDriverWait(driver, 5).until(element_to_be_clickable((By.XPATH, "//a[@class='step-primary']")))
-    driver.find_element(By.XPATH, "//a[@class='step-primary']").click()
+    driver.find_element(By.XPATH, "//a[@class='step-primary']").send_keys(Keys.ENTER)
     driver.execute_script("var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",save)
     print(save.get_attribute("automationTrack"))
     print(driver.current_url)
