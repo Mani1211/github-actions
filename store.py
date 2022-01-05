@@ -834,7 +834,6 @@ def location():
       showToast("Please enter a valid input.")
       isValid = isValid && false;
   }
-  isValid = isValid && this.reportValidity() 
   return isValid
   ''')
     print(test_var)
