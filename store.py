@@ -160,6 +160,7 @@ def draft_order():
     # english_summary()
     # # THAI SUMMARY
     # thai_summary()
+    driver.execute_script("arguments[0].scrollIntoView();",driver.find_element(By.XPATH,"//button[@id='draft']"))
     driver.find_element(By.XPATH,"//button[@id='draft']").click()
     error_check()
 
