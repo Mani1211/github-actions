@@ -231,7 +231,6 @@ def draft_order():
 def take_order():
 # TAKE ORDER
     driver.get("https://shopster.ai/en/app/orders/take-order/")
-
     #ORDER SOURCE
     time.sleep(2)
     driver.find_element(By.XPATH, "//span[@class='mdi mdi-24px mdi-cog date-gear']").click()
