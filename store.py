@@ -1082,14 +1082,14 @@ def seo():
 
 def all_actions():
     # pass
-    orders()
+    # orders()
     # collections()
     # categories()
     # products()
     # discount()
     # bulk_discount()
     # bundle()
-    # location()
+    location()
     # store_info()
     # store_design()
     # payment_information()   
