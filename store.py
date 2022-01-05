@@ -821,6 +821,8 @@ def location():
     element.click()
     save = driver.find_element(By.XPATH, "//a[@class='step-primary']")
     driver.execute_script("arguments[0].scrollIntoView;",save)
+    save_btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,("//span[@id='save']"))))
+    save_btn.click()
     print(driver.get_window_position())
     is_valid = driver.execute_script('''
     let isValid = document.getElementById('pos-location-form').checkValidity()
