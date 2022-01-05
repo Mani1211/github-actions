@@ -20,8 +20,8 @@ import sys
 # driver = webdriver.Chrome(ChromeDriverManager().install())
 username = "shopstertest"
 password = "shopster123!"
-SCREEN_WIDTH=1920
-SCREEN_HEIGHT=1080
+SCREEN_WIDTH=1280
+SCREEN_HEIGHT=720
 
 # driver = webdriver.Chrome(executable_path= path) 
 chrome_options = webdriver.ChromeOptions()
@@ -829,6 +829,7 @@ def location():
         time.sleep(0.2)
         element.click()
     print(driver.get_window_position())
+    print(element.location)
     driver.find_element(By.XPATH, "//span[@id='save']").click()
     print(driver.current_url)
     # WebDriverWait(driver, 20).until(element_to_be_clickable((By.XPATH, "//span[contains(@class,'store-menu-text') and contains(text(), '"+str("Bangkok")+"')]")))
