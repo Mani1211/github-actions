@@ -250,6 +250,7 @@ def take_order():
     driver.implicitly_wait(3)
     driver.find_element(By.XPATH, "//input[@name = 'is_delivery']").click()
     driver.implicitly_wait(5)
+    time.sleep(2)
     driver.find_element(By.XPATH, "//input[@name = 'address']").send_keys("donki mall")
     driver.implicitly_wait(3)
     driver.find_element(By.XPATH, "//button[@id = 'mapgo']").click()
