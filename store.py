@@ -157,9 +157,9 @@ def draft_order():
     driver.find_element(By.XPATH, "//input[@id = 'payment-confirmation']").send_keys(os.path.join(base_dir, '1.jpg'))
     time.sleep(2)
     # ENGLISH SUMMARY
-    # english_summary()
-    # # THAI SUMMARY
-    # thai_summary()
+    english_summary()
+    # THAI SUMMARY
+    thai_summary()
     driver.execute_script("arguments[0].scrollIntoView();",driver.find_element(By.XPATH,"//button[@id='draft']"))
     time.sleep(2)
     driver.find_element(By.XPATH,"//button[@id='draft']").click()
