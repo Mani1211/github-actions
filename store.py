@@ -133,6 +133,7 @@ def draft_order():
             print("Bundle")
     driver.find_element(By.XPATH, "//button[@class = 'select-button']").click()
     driver.find_element(By.XPATH, "//button[@id = 'checkout']").click()
+    time.sleep(2)
     driver.find_element(By.XPATH, "//input[@id = 'order-phone']").send_keys("+919489437364")
     driver.find_element(By.XPATH, "//input[@id = 'order-name']").send_keys("John Doe")
     time.sleep(2)
@@ -188,7 +189,7 @@ def draft_order():
         except:
             print("Bundle")
             driver.find_element(By.XPATH, '(//button[@class = "select-button"])').click()
-    time.sleep(0.6)
+    time.sleep(2)
     driver.find_element(By.XPATH, "//button[@id = 'checkout']").click()
     time.sleep(3)
     element = driver.find_element(By.XPATH, "//button[@id = 'draft']")
