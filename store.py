@@ -54,7 +54,7 @@ def play_beep(event):
         for i in range(0,5):
             os.system('play -nq -t alsa synth {} sine {}'.format(duration, freq))
             time.sleep(0.2)
-
+#
 def error_check():
     driver_log = driver.get_log('browser')
     if len(list(filter(lambda x:x["source"] == "javascript", driver_log))) > 0 :
