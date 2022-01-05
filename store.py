@@ -298,7 +298,7 @@ def orders():
     driver.find_element(By.XPATH, "//span[@id='toggle-select']").click()
     driver.implicitly_wait(3)
     driver.find_element(By.XPATH, "//li[@class='orders-list-item unselected']").click()
-    driver.find_element(By.XPATH, "(//li[@class='orders-list-item unselected'])[3]").click()
+    driver.find_element(By.XPATH, "(//li[@class='orders-list-item unselected'])[1]").click()
     driver.find_element(By.XPATH, "//span[@class='action-text']").click()
     time.sleep(1)
     driver.find_element(By.XPATH, "(//div[@class='bulk-action-item'])[1]").click()
