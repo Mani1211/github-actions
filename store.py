@@ -821,20 +821,7 @@ def location():
     save = driver.find_element(By.XPATH, "//a[@class='step-primary']")
     driver.execute_script("arguments[0].scrollIntoView;",save)
     test_var = driver.execute_script('''
-    $('.intl').each(function(){
-    $(this).trigger('change')
-    let iti = itis[$(this).attr('id')]
-    $(this).val(iti.getNumber())
-  })
-  let isValid=true;
-  if($('.text-danger:visible').length==0){
-      $('#save').prop('disabled', true);
-  }
-  else{
-      showToast("Please enter a valid input.")
-      isValid = isValid && false;
-  }
-  return isValid
+    $('#pos-location-form').submit();
   ''')
     print(test_var)
     save_btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,("//span[@id='save']"))))
