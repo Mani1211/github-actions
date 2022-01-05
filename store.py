@@ -68,7 +68,7 @@ def hour_rounder(t):
                +timedelta(hours=3))
 
 #LOGIN
-
+print(driver.get_window_size())
 temp_username= driver.find_element(By.XPATH, "//input[@name='username']")
 temp_username.send_keys(username)
 
