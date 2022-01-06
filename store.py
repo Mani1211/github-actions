@@ -168,8 +168,8 @@ def take_order(temp):
     element = WebDriverWait(driver, 2).until(
     EC.element_to_be_clickable((By.XPATH, "//input[@id = 'payment-confirmation']")))
     driver.execute_script("arguments[0].scrollIntoView();",element)
-    element.send_keys('/home/rohan/Code/selenium.py/1.jpg')
-    # driver.find_element(By.XPATH, "//input[@id = 'payment-confirmation']").send_keys(os.path.join(base_dir, '1.jpg'))
+    # element.send_keys('/home/rohan/Code/selenium.py/1.jpg')
+    driver.find_element(By.XPATH, "//input[@id = 'payment-confirmation']").send_keys(os.path.join(base_dir, '1.jpg'))
 
     #ENGLISH SUMMARY 
     english_summary()
@@ -243,8 +243,8 @@ def finished_image_div():
     try:
         element = driver.find_element(By.XPATH, "//input[@id = 'media']")
         driver.execute_script("arguments[0].scrollIntoView();",element)
-        element.send_keys('/home/rohan/Code/selenium.py/1.jpg')
-        # driver.find_element(By.XPATH, "//input[@id = 'media']").send_keys(os.path.join(base_dir, '1.jpg'))
+        # element.send_keys('/home/rohan/Code/selenium.py/1.jpg')
+        driver.find_element(By.XPATH, "//input[@id = 'media']").send_keys(os.path.join(base_dir, '1.jpg'))
         element = driver.find_element(By.XPATH, '//button[@class="uk-button uk-button-primary"]')
         driver.execute_script("arguments[0].scrollIntoView();",element)
         driver.find_element(By.XPATH, '//button[@class="uk-button uk-button-primary"]').click()
