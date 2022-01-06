@@ -21,15 +21,15 @@ from selenium.webdriver.common.action_chains import ActionChains
 # driver = webdriver.Chrome(ChromeDriverManager().install())
 username = "shopstertest"
 password = "shopster123!"
-SCREEN_WIDTH=1280
-SCREEN_HEIGHT=720
+SCREEN_WIDTH=1900
+SCREEN_HEIGHT=980
 # driver = webdriver.Chrome(executable_path= path) 
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument('--remote-debugging-port=9222')
-chrome_options.add_argument('--no-sandbox') 
-chrome_options.binary_location = "/usr/bin/google-chrome"
-chrome_options.add_argument('--headless') 
-chrome_options.add_argument('--disable-dev-shm-usage')
+# chrome_options.add_argument('--remote-debugging-port=9222')
+# chrome_options.add_argument('--no-sandbox') 
+# chrome_options.binary_location = "/usr/bin/google-chrome"
+# chrome_options.add_argument('--headless') 
+# chrome_options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome('./test_resources/chromedriver',chrome_options=chrome_options) 
 # driver.maximize_window()
 driver.set_window_size(SCREEN_WIDTH,SCREEN_HEIGHT)
@@ -80,7 +80,6 @@ driver.find_element(By.XPATH, "//button[@class = 'login-cta-button']").click()
 
 def english_summary():
     # ENGLISH SUMMARY
-    time.sleep(2)
     element = WebDriverWait(driver, 20).until(
     EC.element_to_be_clickable((By.XPATH, "//button[@id = 'copy-en']")))
     element.click()
@@ -111,143 +110,21 @@ def thai_summary():
     except NoSuchElementException:
         raise Exception("Thai Toast Error")
 
-def draft_order():
-
+def take_order(temp):
     driver.get("https://shopster.ai/en/app/orders/take-order/")
-    element = driver.find_element(By.XPATH, "(//div[contains(@class , 'all-products-single-name')])[2]")
-    driver.execute_script("arguments[0].scrollIntoView();",element)
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "//span[@class='mdi mdi-24px mdi-cog date-gear']")))
     element.click()
-    time.sleep(2)
-    try:
-        # TRY DROPDOWN
-        select = Select(driver.find_element(By.XPATH, "//select[@class = 'custom-select custom-select-sm']"))
-        element = driver.find_element(By.XPATH, "//select[@class = 'custom-select custom-select-sm']")
-        element.click()
-        select.select_by_index(1)
-    except:
-        try:
-            # TRY TEXTBOX
-            element = driver.find_element(By.XPATH, "(//input[contains(@class , 'store-text-input my-1 product-message')])")
-            element.send_keys("Ordered")
-        except:
-            print("Bundle")
-    driver.find_element(By.XPATH, "//button[@class = 'select-button']").click()
-    driver.find_element(By.XPATH, "//button[@id = 'checkout']").click()
-    time.sleep(2)
-    driver.find_element(By.XPATH, "//input[@id = 'order-phone']").send_keys("+919489437364")
-    driver.find_element(By.XPATH, "//input[@id = 'order-name']").send_keys("John Doe")
-    time.sleep(2)
-    driver.implicitly_wait(3)
-    element = driver.find_element(By.XPATH, "//input[@name = 'is_delivery']")
-    driver.execute_script("arguments[0].scrollIntoView();",element)
-    element.click()
-    driver.implicitly_wait(5)
-    time.sleep(2)
-    element = driver.find_element(By.XPATH, "//input[@name = 'address']")
-    driver.execute_script("arguments[0].scrollIntoView();",element)
-    element.send_keys("donki mall")
-    driver.implicitly_wait(3)
-    driver.find_element(By.XPATH, "//button[@id = 'mapgo']").click()
-    driver.implicitly_wait(3)
-    select = Select(driver.find_element_by_xpath("//select[@id='payment_method']"))
-    # select.click()
-    select.select_by_index(1)
-    driver.find_element(By.XPATH, "//input[@id = 'shipping']").send_keys("14/12/2021 13:00")
-    driver.find_element(By.XPATH, "//input[@id = 'shipping']").send_keys(Keys.ENTER)
-    driver.find_element(By.XPATH, "//input[@id = 'payment-confirmation']").send_keys(os.path.join(base_dir, '1.jpg'))
-    time.sleep(2)
-    # ENGLISH SUMMARY
-    english_summary()
-    # THAI SUMMARY
-    thai_summary()
-    driver.execute_script("arguments[0].scrollIntoView();",driver.find_element(By.XPATH,"//button[@id='draft']"))
-    time.sleep(2)
-    driver.find_element(By.XPATH,"//button[@id='draft']").click()
-    error_check()
-
-    # EDIT DRAFT
-    driver.get("https://shopster.ai/en/app/orders/")
-    driver.find_element(By.XPATH, "//li[contains(text(), 'Draft')]").click()
-
-    time.sleep(2)
-    element = driver.find_element(By.XPATH, "(//div[contains(@class,'orderer-name')])[1]")
-    element.click()
-    element = driver.find_element(By.XPATH, "(//div[contains(@class , 'all-products-single-name')])[2]")
-    driver.execute_script("arguments[0].scrollIntoView();",element)
-    driver.find_element(By.XPATH, "(//div[contains(@class , 'all-products-single-name')])[2]").click()
-    try:
-        # TRY DROPDOWN
-        # element = driver.find_element(By.XPATH, "//select[@class = 'custom-select custom-select-sm']")
-        # element.click()
-        select = Select(driver.find_element_by_xpath("//select[@class = 'custom-select custom-select-sm']"))
-        select.select_by_index(0)
-        driver.find_element(By.XPATH, '(//button[@class = "select-button"])').click()
-    except:
-        try:
-            # TRY TEXTBOX
-            element = driver.find_element(By.XPATH, "(//input[contains(@class , 'store-text-input my-1 product-message')])")
-            element.send_keys("Ordered")
-            driver.find_element(By.XPATH, '(//button[@class = "select-button"])').click()
-        except:
-            print("Bundle")
-            driver.find_element(By.XPATH, '(//button[@class = "select-button"])').click()
-    time.sleep(2)
-    driver.find_element(By.XPATH, "//button[@id = 'checkout']").click()
-    time.sleep(3)
-    element = driver.find_element(By.XPATH, "//button[@id = 'draft']")
-    # element = WebDriverWait(driver, 20).until(
-    # EC.element_to_be_clickable((By.XPATH, "//button[@id = 'draft']")))
-    # element.click()
-    driver.execute_script("arguments[0].scrollIntoView();",element)
-    element.click()
-    try:
-        alert = Alert(driver)
-        print(alert.text)
-        alert.accept()
-    except:
-        print("No such alert")
-    error_check()
-
-    # DELETE DRAFT
-    driver.find_element(By.XPATH, "//li[contains(text(), 'Draft')]").click()
-    time.sleep(1)
-    element = driver.find_element(By.XPATH, "//div[contains(@class,'orderer-name') and contains(text(), 'John Doe') ]")
-    element.click()
-    element = driver.find_element(By.XPATH, "//div[contains(@class , 'all-products-single-name') and contains(text(), 'HELLA NUTELLA')]")
-    driver.execute_script("arguments[0].scrollIntoView();",element)
-    driver.find_element(By.XPATH, "//div[contains(@class , 'all-products-single-name') and contains(text(), 'HELLA NUTELLA')]").click()
-    time.sleep(2)
-    driver.find_element(By.XPATH, "//button[@id = 'checkout']").click()
-    element = driver.find_element(By.XPATH, "//button[@id = 'delete']")
-    driver.execute_script("arguments[0].scrollIntoView();",element)
-    driver.find_element(By.XPATH, "//button[@id = 'delete']").click()
-    alert = Alert(driver)
-    print(alert.text)
-    alert.accept()
-    print("Deleted Successfully!!")
-
-    error_check()
-
-def take_order():
-# TAKE ORDER
-    driver.get("https://shopster.ai/en/app/orders/take-order/")
-
-    #ORDER SOURCE
-    time.sleep(2)
-    driver.find_element(By.XPATH, "//span[@class='mdi mdi-24px mdi-cog date-gear']").click()
+    # driver.find_element(By.XPATH, "//span[@class='mdi mdi-24px mdi-cog date-gear']").click()
     count = driver.find_elements(By.XPATH, "//li[@class='products-list-item tier-form']")
     print(len(count))
-    driver.implicitly_wait(5)
     driver.find_element(By.XPATH, "//span[@id= 'add-form']").click()
-    driver.implicitly_wait(5)
-    element = driver.find_element(By.XPATH, "(//input[@name='ordersource_set-{0}-name'])".format(str(len(count)))).send_keys("tester")
+    driver.find_element(By.XPATH, "(//input[@name='ordersource_set-{0}-name'])".format(str(len(count)))).send_keys("tester")
     driver.find_element(By.XPATH, "(//span[@class = 'mdi mdi-20px mdi-close store-menu-icon'])[{0}]".format(str(len(count)-1))).click()
     driver.find_element(By.XPATH, "//button[@id='save-option']").click()
-
     element = driver.find_element(By.XPATH, "(//div[contains(@class , 'all-products-single-name')])[2]")
     driver.execute_script("arguments[0].scrollIntoView();",element)
     driver.find_element(By.XPATH, "(//div[contains(@class , 'all-products-single-name')])[2]").click()
-    time.sleep(2)
     try:
         # TRY DROPDOWN
         select = Select(driver.find_element(By.XPATH, "//select[@class = 'custom-select custom-select-sm']"))
@@ -261,148 +138,89 @@ def take_order():
             element.send_keys("Ordered")
         except:
             print("Bundle")
-    # element = driver.find_element(By.XPATH, "//div[contains(@class , 'all-products-single-name') and contains(text(), 'MILK CANDY')]")
-    # driver.execute_script("arguments[0].scrollIntoView();",element)
-    # driver.find_element(By.XPATH, "//div[contains(@class , 'all-products-single-name') and contains(text(), 'MILK CANDY')]").click()
-    # driver.implicitly_wait(5)
-    # select = Select(driver.find_element(By.XPATH, "//select[@class = 'custom-select custom-select-sm']"))
-    # element = driver.find_element(By.XPATH, "//select[@class = 'custom-select custom-select-sm']")
-    # element.click()
-    # select.select_by_visible_text('strwaberry')
-    driver.find_element(By.XPATH, "//button[@class = 'select-button']").click()
-    time.sleep(2)
-    driver.find_element(By.XPATH, "//button[@id = 'checkout']").click()
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "//button[@class = 'select-button']")))
+    element.click()
+    # driver.find_element(By.XPATH, "//button[@class = 'select-button']").click()
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "//button[@id = 'checkout']")))
+    element.click()
+    # driver.find_element(By.XPATH, "//button[@id = 'checkout']").click()
     driver.find_element(By.XPATH, "//input[@id = 'order-phone']").send_keys("+919489437364")
     driver.find_element(By.XPATH, "//input[@id = 'order-name']").send_keys("John Doe")
-    driver.implicitly_wait(3)
     element = driver.find_element(By.XPATH, "//input[@name = 'is_delivery']")
     driver.execute_script("arguments[0].scrollIntoView();",element)
-    driver.implicitly_wait(5)
-    time.sleep(3)
-    driver.find_element(By.XPATH, "//input[@name = 'is_delivery']").click()
-    element = driver.find_element(By.XPATH, "//input[@name = 'address']")
-    driver.execute_script("arguments[0].scrollIntoView();",element)
-    time.sleep(3)
+    element.click()
+    # element = driver.find_element(By.XPATH, "//input[@name = 'address']")
+    element = WebDriverWait(driver, 3).until(
+    EC.visibility_of_element_located((By.XPATH, "//input[@name = 'address']")))
     element.send_keys("donki mall")
-    driver.implicitly_wait(3)
-    driver.find_element(By.XPATH, "//button[@id = 'mapgo']").click()
-    driver.implicitly_wait(3)
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "//button[@id = 'mapgo']")))
+    element.click()
     now = datetime.now()
     d = hour_rounder(now)
     date_time = d.strftime("%m/%d/%Y %H:%M")
     select = Select(driver.find_element_by_xpath("//select[@id='payment_method']"))
-    # select.click()
     select.select_by_index(1)
     driver.find_element(By.XPATH, "//input[@id = 'shipping']").send_keys(str(date_time))
-    driver.find_element(By.XPATH, "//input[@id = 'payment-confirmation']").send_keys(os.path.join(base_dir, '1.jpg'))
-    time.sleep(3)
-    driver.find_element(By.XPATH, "//button[@id = 'copy-en']").click()
-    error_check()
+    driver.find_element(By.XPATH, "//input[@id = 'shipping']").send_keys(Keys.ENTER)
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "//input[@id = 'payment-confirmation']")))
+    driver.execute_script("arguments[0].scrollIntoView();",element)
+    element.send_keys('/home/rohan/Code/selenium.py/1.jpg')
+    # driver.find_element(By.XPATH, "//input[@id = 'payment-confirmation']").send_keys(os.path.join(base_dir, '1.jpg'))
 
     #ENGLISH SUMMARY 
-
     english_summary()
 
     # THAI SUMMARY
     thai_summary()
-
-    driver.find_element(By.XPATH, "//button[@id = 'finalize']").click()
-    print("Placed Successfully!!")
-    driver.implicitly_wait(5)
-    alert = Alert(driver)
-    print(alert.text)
-    alert.accept()
-    try:
+    if temp == "take" :
+        driver.find_element(By.XPATH, "//button[@id = 'finalize']").click()
+        print("Placed Successfully!!")
         alert = Alert(driver)
         print(alert.text)
         alert.accept()
+        try:
+            alert = Alert(driver)
+            print(alert.text)
+            alert.accept()
+        except:
+            print("datetime is correct")
+    else:
+        element = driver.find_element(By.XPATH, "//button[@id = 'draft']")
+        driver.execute_script("arguments[0].scrollIntoView();",element)
+        element.click()
+
+def edit_order():
+    # driver.find_element(By.XPATH, "//a[@class='custom-link']").click()
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "//a[@class='custom-link']")))
+    element.click()
+    element = driver.find_element(By.XPATH, "(//div[contains(@class , 'all-products-single-name')])[3]")
+    driver.execute_script("arguments[0].scrollIntoView();",element)
+    element.click()
+    try:
+        # TRY DROPDOWN
+        select = Select(driver.find_element(By.XPATH, "//select[@class = 'custom-select custom-select-sm']"))
+        element = driver.find_element(By.XPATH, "//select[@class = 'custom-select custom-select-sm']")
+        element.click()
+        select.select_by_index(1)
     except:
-        print("datetime is correct")
-    # driver.find_element(By.XPATH, '(//i[@class = "material-icons close-icon"])[3]').click()
-    error_check()
-   
+        try:
+            # TRY TEXTBOX
+            element = driver.find_element(By.XPATH, "(//input[contains(@class , 'store-text-input my-1 product-message')])")
+            element.send_keys("Ordered")
+        except:
+            print("Bundle")
 
-
-def orders():
-    # SELECT ORDERS 
-    driver.get("https://shopster.ai/en/app/orders/")
-    element = driver.find_element(By.XPATH, "//input[@id = 'min_picker']")
-    element.send_keys(Keys.CONTROL + 'a')
-    element.send_keys(Keys.BACK_SPACE)
-    element.send_keys("01/12/2021")
-    element.send_keys(Keys.ENTER)
-    driver.find_element(By.XPATH, "//span[@id='toggle-select']").click()
-    driver.implicitly_wait(3)
-    driver.find_element(By.XPATH, "//li[@class='orders-list-item unselected']").click()
-    driver.find_element(By.XPATH, "(//li[@class='orders-list-item unselected'])[1]").click()
-    driver.find_element(By.XPATH, "//span[@class='action-text']").click()
-    time.sleep(1)
-    driver.find_element(By.XPATH, "(//div[@class='bulk-action-item'])[1]").click()
-    error_check()
-
-    # ACTIONS
-    driver.find_element(By.XPATH, "//li[contains(text(), 'Approved')]").click()
-    driver.find_element(By.XPATH, "//li[contains(text(), 'Placed')]").click()
-    driver.find_element(By.XPATH, "//li[contains(text(), 'Fulfilled')]").click()
-    driver.find_element(By.XPATH, "//li[contains(text(), 'Cancelled')]").click()
-    driver.find_element(By.XPATH, "//li[contains(text(), 'Draft')]").click()
-    driver.find_element(By.XPATH, "//li[contains(text(), 'All')]").click()
-    time.sleep(1)
-    driver.find_element(By.XPATH, "//span[@class='more-actions-nav-button']").click()
-    driver.find_element(By.XPATH, "//span[@id='summary-show']").click()
-    time.sleep(1)
-    driver.find_element(By.XPATH, "(//button[@class='mdi mdi-24px mdi-close uk-modal-close-default uk-icon uk-close'])[2]").click()
-    driver.find_element(By.XPATH, "//span[@class='more-actions-nav-button']").click()
-    driver.find_element(By.XPATH, "//a[@id='get_report']").click()
-    time.sleep(2)
-    # xlsx_file = Path('/home/rohan/Downloads', 'Orders Report.xlsx')
-    # driver.implicitly_wait(3)
-    # wb_obj = openpyxl.load_workbook(xlsx_file)
-    # sheet = wb_obj.active
-    # if(sheet.max_row>1):
-    #     print("Data exists")
-    # else:
-    #     raise Exception("No Data Found")
-    driver.find_element(By.XPATH, "//a[@id='delivery_report']").click()
-    time.sleep(2)
-    # xlsx_file = Path('/home/rohan/Downloads', 'Delivery Report.xlsx')
-    # wb_obj = openpyxl.load_workbook(xlsx_file)
-    # sheet = wb_obj.active
-    # if(sheet.max_row>1):
-    #     print("Data exists")
-    # else:
-    #     raise Exception("No Data Found")
-
-    error_check()
-
-    take_order()
-    
-    # EDIT ORDER HISTORY
-
-    driver.get("https://shopster.ai/en/app/orders/")
-    time.sleep(2)
-    # driver.find_element(By.XPATH, '//span[ contains(text(), "Back")]').click()
-    # time.sleep(2)
-    element = driver.find_element(By.XPATH, "//div[contains(@class,'orderer-name') and contains(text(), ' John Doe') ]")
-    driver.execute_script("arguments[0].scrollIntoView();",element)
-    time.sleep(2)
-    driver.implicitly_wait(5)
-    driver.find_element(By.XPATH, "//div[contains(@class,'orderer-name') and contains(text(), ' John Doe') ]").click()
-    driver.find_element(By.XPATH, "//a[@class='custom-link']").click()
-    element = driver.find_element(By.XPATH, "//div[contains(@class , 'all-products-single-name') and contains(text(), 'FERRERO CHOCOLATE TART')]")
-    driver.execute_script("arguments[0].scrollIntoView();",element)
-    driver.find_element(By.XPATH, "//div[contains(@class , 'all-products-single-name') and contains(text(), 'FERRERO CHOCOLATE TART')]").click()
-    driver.find_element(By.XPATH, "//button[@id = 'checkout']").click()
-    time.sleep(1)
-    element = driver.find_element(By.XPATH, "//input[@id = 'shipping']")
-    driver.execute_script("arguments[0].scrollIntoView();",element)
-    now = datetime.now()
-    d = hour_rounder(now)
-    date_time = d.strftime("%m/%d/%Y %H:%M")
-    element.send_keys(Keys.CONTROL + "a")
-    element.send_keys(Keys.BACK_SPACE)
-    element.send_keys(date_time)
-    element.send_keys(Keys.ENTER)
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "//button[@class = 'select-button']")))
+    element.click()
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "//button[@id = 'checkout']")))
+    element.click()
     element = driver.find_element(By.XPATH, "//button[@id = 'finalize']")
     driver.execute_script("arguments[0].scrollIntoView();",element)
     element.click()
@@ -416,11 +234,8 @@ def orders():
         alert.accept()
     except:
         print("No date error")
-    error_check()
 
-    # FINISHED IMAGE 
-
-
+def finished_image_div():
     driver.get("https://shopster.ai/en/app/orders/")
     element = driver.find_element(By.XPATH, "//ul[@class='draft-orders']//following::ul//a//li[@class='orders-list-item']")
     driver.execute_script("arguments[0].scrollIntoView();",element)
@@ -428,20 +243,20 @@ def orders():
     try:
         element = driver.find_element(By.XPATH, "//input[@id = 'media']")
         driver.execute_script("arguments[0].scrollIntoView();",element)
-        driver.find_element(By.XPATH, "//input[@id = 'media']").send_keys(os.path.join(base_dir, '1.jpg'))
+        element.send_keys('/home/rohan/Code/selenium.py/1.jpg')
+        # driver.find_element(By.XPATH, "//input[@id = 'media']").send_keys(os.path.join(base_dir, '1.jpg'))
         element = driver.find_element(By.XPATH, '//button[@class="uk-button uk-button-primary"]')
         driver.execute_script("arguments[0].scrollIntoView();",element)
         driver.find_element(By.XPATH, '//button[@class="uk-button uk-button-primary"]').click()
     except:
         print("No Finished Image div")
 
-    error_check()
-
-    # IN HOUSE DRIVER
+def inhouse_driver():
     driver.get("https://shopster.ai/en/app/orders/")
     order_id = driver.find_element(By.XPATH, "//ul[@class='draft-orders']//following::ul//a//li//div[@class='order-number']").text
     print(order_id)
 
+    # INHOUSE DRIVER
     element = driver.find_element(By.XPATH, "//div[contains(@class,'orderer-name') and contains(text(), ' John Doe') ]")
     driver.execute_script("arguments[0].scrollIntoView();",element)
     element.click()
@@ -449,38 +264,131 @@ def orders():
     element = driver.find_element(By.XPATH, "//select[@id = 'select_driver']")
     element.click()
     select.select_by_index(1)
-
-    error_check()
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, '//span[ contains(text(), "Back")]')))
+    element.click()
+    # driver.find_element(By.XPATH, '//span[ contains(text(), "Back")]').click()
 
     # ORDER STATUS
-
+    element = driver.find_element(By.XPATH, "//div[contains(@class,'order-number') and contains(text(),'"+order_id +"')]")
+    driver.execute_script("arguments[0].scrollIntoView();",element)
+    print(element.text)
+    element.click()
     select = Select(driver.find_element(By.XPATH, "//select[@id = 'select_status']"))
     element = driver.find_element(By.XPATH, "//select[@id = 'select_status']")
     element.click()
-    select.select_by_index(2)
+    select.select_by_visible_text("Fulfilled")
     driver.find_element(By.XPATH, '//span[ contains(text(), "Back")]').click()
     print("ordere id " + order_id)
-
-    error_check()
     # ASSERT ORDER ID
     driver.get("https://shopster.ai/en/app/orders/")
     element = driver.find_element(By.XPATH, "//div[contains(@class,'order-number') and contains(text(),'"+order_id +"')]")
     driver.execute_script("arguments[0].scrollIntoView();",element)
-    time.sleep(2)
-    driver.find_element(By.XPATH, "//div[contains(@class,'order-number') and contains(text(),'"+order_id +"')]").click()
-
-
+    print(element.text)
+    element.click()
     select = Select(driver.find_element(By.XPATH, "//select[@id = 'select_status']"))
     selected = select.first_selected_option
     if(selected.text == "Fulfilled"):
         print("Assertion Successful")
     else:
         print("Error")
-        print(selected)
+        print(selected.text)
+
+def draft_orders():
+    take_order("draft")
+
+    # EDIT DRAFT 
+    driver.find_element(By.XPATH, "//li[contains(text(), 'Draft')]").click()
+    element = driver.find_element(By.XPATH, "(//div[contains(@class,'orderer-name')])[1]")
+    element.click()
+    element = driver.find_element(By.XPATH, "(//div[contains(@class , 'all-products-single-name')])[2]")
+    driver.execute_script("arguments[0].scrollIntoView();",element)
+    driver.find_element(By.XPATH, "(//div[contains(@class , 'all-products-single-name')])[2]").click()
+    try:
+        # TRY DROPDOWN
+        select = Select(driver.find_element(By.XPATH, "//select[@class = 'custom-select custom-select-sm']"))
+        element = driver.find_element(By.XPATH, "//select[@class = 'custom-select custom-select-sm']")
+        element.click()
+        select.select_by_index(1)
+    except:
+        try:
+            # TRY TEXTBOX
+            element = driver.find_element(By.XPATH, "(//input[contains(@class , 'store-text-input my-1 product-message')])")
+            element.send_keys("Ordered")
+        except:
+            print("Bundle")
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "//button[@class = 'select-button']")))
+    element.click()
+    # driver.find_element(By.XPATH, "//button[@class = 'select-button']").click()
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "//button[@id = 'checkout']")))
+    element.click()
+    element = driver.find_element(By.XPATH, "//button[@id = 'draft']")
+    driver.execute_script("arguments[0].scrollIntoView();",element)
+    element.click()
+
+    # DELETE  DRAFT
+    driver.find_element(By.XPATH, "//li[contains(text(), 'Draft')]").click()
+    time.sleep(1)
+    element = driver.find_element(By.XPATH, "(//div[contains(@class,'orderer-name')])[1]")
+    element.click()
+    driver.find_element(By.XPATH, "//button[@id = 'checkout']").click()
+    element = driver.find_element(By.XPATH, "//button[@id = 'delete']")
+    driver.execute_script("arguments[0].scrollIntoView();",element)
+    driver.find_element(By.XPATH, "//button[@id = 'delete']").click()
+    alert = Alert(driver)
+    print(alert.text)
+    alert.accept()
+    print("Deleted Successfully!!")
+
+# ORDERS
+def orders():
+    driver.get("https://shopster.ai/en/app/orders/")
+    element = driver.find_element(By.XPATH, "//input[@id = 'min_picker']")
+    element.send_keys(Keys.CONTROL + 'a')
+    element.send_keys(Keys.BACK_SPACE)
+    element.send_keys("01/12/2021")
+    element.send_keys(Keys.ENTER)
+    driver.find_element(By.XPATH, "//span[@id='toggle-select']").click()
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "//li[@class='orders-list-item unselected']")))
+    element.click()
+    # driver.find_element(By.XPATH, "//li[@class='orders-list-item unselected']").click()
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "(//li[@class='orders-list-item unselected'])[1]")))
+    element.click()
+    # driver.find_element(By.XPATH, "(//li[@class='orders-list-item unselected'])[1]").click()
+    driver.find_element(By.XPATH, "//span[@class='action-text']").click()
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "(//div[@class='bulk-action-item'])[1]")))
+    element.click()
+    # driver.find_element(By.XPATH, "(//div[@class='bulk-action-item'])[1]").click()
+
+    # ACTIONS
+    driver.find_element(By.XPATH, "//li[contains(text(), 'Approved')]").click()
+    driver.find_element(By.XPATH, "//li[contains(text(), 'Placed')]").click()
+    driver.find_element(By.XPATH, "//li[contains(text(), 'Fulfilled')]").click()
+    driver.find_element(By.XPATH, "//li[contains(text(), 'Cancelled')]").click()
+    driver.find_element(By.XPATH, "//li[contains(text(), 'Draft')]").click()
+    driver.find_element(By.XPATH, "//li[contains(text(), 'All')]").click()
+    element = WebDriverWait(driver, 2).until(
+    EC.element_to_be_clickable((By.XPATH, "//span[@class='more-actions-nav-button']")))
+    element.click()
+    # driver.find_element(By.XPATH, "//span[@class='more-actions-nav-button']").click()
+    driver.find_element(By.XPATH, "//span[@id='summary-show']").click()
+    driver.find_element(By.XPATH, "(//button[@class='mdi mdi-24px mdi-close uk-modal-close-default uk-icon uk-close'])[2]").click()
+    driver.find_element(By.XPATH, "//span[@class='more-actions-nav-button']").click()
+    # driver.find_element(By.XPATH, "//a[@id='get_report']").click()
+    # driver.find_element(By.XPATH, "//a[@id='delivery_report']").click()
+
+    take_order("take")
+    edit_order()
+    finished_image_div()
+    inhouse_driver()
 
     # DRAFT ORDERS
-    draft_order()
-error_check()
+    draft_orders()
 
 #collections
 
