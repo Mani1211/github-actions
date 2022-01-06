@@ -151,8 +151,8 @@ def take_order(temp):
     element = driver.find_element(By.XPATH, "//input[@name = 'is_delivery']")
     driver.execute_script("arguments[0].scrollIntoView();",element)
     element.click()
-    # element = driver.find_element(By.XPATH, "//input[@name = 'address']")
-    element = WebDriverWait(driver, 3).until(
+    element = driver.find_element(By.XPATH, "//input[@name = 'address']")
+    WebDriverWait(driver, 3).until(
     EC.visibility_of_element_located((By.XPATH, "//input[@name = 'address']")))
     element.send_keys("donki mall")
     element = WebDriverWait(driver, 2).until(
